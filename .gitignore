@@ -23,6 +23,10 @@ lerna-debug.log*
 .env.*
 !.env.example
 
+# Xcode local env (machine-specific)
+.xcode.env.local
+.xcode.env.*
+
 # Metro / Jest / cache
 .metro-health-check*
 .cache/
