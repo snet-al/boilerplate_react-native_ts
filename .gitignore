@@ -27,12 +27,37 @@ lerna-debug.log*
 .xcode.env.local
 .xcode.env.*
 
+# Xcode project files / build outputs
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.xcuserstate
+**/xcuserdata/
+DerivedData
+
 # Metro / Jest / cache
 .metro-health-check*
 .cache/
 tmp/
 coverage/
 *.log
+
+# Yarn v3+
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 #############################################
 # Android
@@ -44,7 +69,11 @@ android/build/
 android/app/build/
 android/app/release/
 *.keystore
+!debug.keystore
 *.jks
+.cxx/
+.kotlin/
+.hprof
 
 #############################################
 # iOS
@@ -63,3 +92,12 @@ ios/DerivedData/
 dist/
 build/
 vendor/bundle/
+
+# Fastlane artifacts
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+
+# Bundle artifact
+*.jsbundle
