@@ -2,6 +2,12 @@
 
 This folder contains app-facing services that modules and screens can import.
 
+Before editing code, read the project `.cursor` instructions:
+
+- `.cursor/rules.md`
+- `.cursor/playbooks.md`
+- `.cursor/anti-patterns.md`
+
 Use `services` for:
 
 - Domain API services grouped by backend context.
