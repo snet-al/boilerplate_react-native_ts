@@ -1,14 +1,17 @@
 import { Stack } from 'expo-router';
+import { PublicGuard } from '@/guards';
 
 export default function AuthLayout() {
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="login" />
-    </Stack>
+    <PublicGuard>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="login" />
+      </Stack>
+    </PublicGuard>
   );
 }
 

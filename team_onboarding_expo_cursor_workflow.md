@@ -9,7 +9,7 @@ Welcome to the project. This document explains **how we build**, **why we build 
 - Ship production-ready **React Native apps fast**
 - Maintain **high code quality** while using AI
 - Avoid common React Native & AI pitfalls
-- Scale features and team without rewrites
+- Scale modules and team without rewrites
 
 Our stack and rules are intentionally opinionated.
 
@@ -29,7 +29,7 @@ Our stack and rules are intentionally opinionated.
 **State & Data**
 - Zustand → client state
 - TanStack Query → server state
-- Axios via shared `apiClient`
+- Axios via shared `HttpClient`
 
 **AI Tooling**
 - Cursor as primary AI assistant
@@ -43,7 +43,7 @@ We use **feature-based architecture**.
 ```
 src/
  ├─ app/                # Expo Router screens
- ├─ features/           # Feature modules (logic lives here)
+ ├─ modules/            # Feature modules (logic lives here)
  ├─ components/         # Shared UI components
  ├─ services/           # API, storage, integrations
  ├─ hooks/              # Reusable hooks
@@ -66,7 +66,7 @@ Cursor is treated as a **junior engineer**:
 - Needs clear rules
 
 ### What Cursor Is Allowed To Do
-- Scaffold features
+- Scaffold modules
 - Generate screens
 - Refactor code
 - Review performance
@@ -144,7 +144,7 @@ Refer to:
 Before pushing code:
 
 - [ ] Screen contains only UI logic
-- [ ] Feature logic lives in `features/`
+- [ ] Module logic lives in `modules/`
 - [ ] No web-only APIs
 - [ ] Types are explicit
 - [ ] Cursor pre-commit review done

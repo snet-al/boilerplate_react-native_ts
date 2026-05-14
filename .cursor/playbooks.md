@@ -1,22 +1,29 @@
 ================================
-FEATURE SCAFFOLD PLAYBOOK
+MODULE SCAFFOLD PLAYBOOK
 ================================
-TASK: Scaffold a new feature
+TASK: Scaffold a new module
 
 Inputs:
-- Feature name: <feature>
+- Module name: <module>
+- Parent page/domain: <page-or-domain>
 
 Files to create:
-- api.ts
-- store.ts
-- types.ts
-- components.tsx
+- index.ts
+- README.md
+- hooks.ts (only if reusable stateful logic is needed)
+- types.ts (only for module-local types)
+- components/ (only for module-specific UI pieces)
 
 Rules:
-- Feature-based architecture
+- Module-based architecture
+- Modules are page-level extracted sections, not route files
+- Use modules when a page becomes too complex, e.g. dashboard statistics/top users/sales
+- Module code may contain business logic, API orchestration, state, hooks, and UI composition
+- Route files stay in `app`
 - Strong typing
-- No UI libraries
-- No navigation logic inside feature
+- Use services for API calls
+- Use `components/ui` for generic UI primitives
+- No Expo Router navigation setup inside modules
 ================================
 
 
@@ -26,27 +33,30 @@ SCREEN CREATION PLAYBOOK
 TASK: Create a screen
 
 Inputs:
-- File path: src/app/<route>.tsx
+- File path: app/<route>.tsx
 
 Requirements:
 - Expo Router screen
 - Keyboard-safe layout
 - Platform compatible (iOS + Android)
-- UI only, no business logic
-- Uses feature hooks for data/state
+- Keep route files readable and screen-focused
+- Use route group layouts for shared public/private guards
+- Move complex business logic or large page sections into `modules`
+- Use `components/ui` primitives for generic UI
 ================================
 
 
 ================================
-ZUSTAND STORE PLAYBOOK
+REDUX STORE PLAYBOOK
 ================================
-TASK: Create Zustand store
+TASK: Create Redux state
 
 Requirements:
-- Typed state and actions
-- No side effects inside UI
-- Persist only when necessary
-- Use Expo SecureStore for sensitive data
+- Use Redux Toolkit slices under `store/redux/slices`
+- Use typed hooks from `store/redux/hooks.ts`
+- Store only global client state
+- Keep reducers synchronous and serializable
+- Keep async work in services or thunks
 ================================
 
 
@@ -56,10 +66,29 @@ API LAYER PLAYBOOK
 TASK: Add API functions
 
 Requirements:
-- Use shared apiClient
+- Add domain services under `services`
+- Use `BaseService` only for repeated resource/CRUD behavior
+- CRUD-like services may extend `BaseService` and define `resource()`
+- Use BaseService CRUD helpers: `index`, `get`, `create`, `update`, `patch`, `delete`
 - Explicit request and response types
 - No axios instance creation
-- No direct API calls from screens
+- Custom services may use `HttpClient` directly when BaseService CRUD helpers do not fit
+- No UI side effects in services: no alerts, no toasts, no navigation
+================================
+
+
+================================
+GUARD PLAYBOOK
+================================
+TASK: Add or update route guard
+
+Requirements:
+- Guards live in `guards`
+- Public auth route groups use `PublicGuard`
+- Protected app route groups use `PrivateGuard`
+- Apply guards in route group `_layout.tsx` files
+- Guards may read Redux auth state
+- Guards should only check access and redirect
 ================================
 
 
@@ -95,8 +124,10 @@ REFACTOR PLAYBOOK
 TASK: Refactor code
 
 Goals:
+- Focus on ReadME files
 - Reduce complexity
 - Extract hooks
+- Extract page sections into modules
 - Improve readability
 - Preserve existing behavior
 ================================
